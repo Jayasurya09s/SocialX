@@ -75,7 +75,10 @@ exports.getFeed = async (req, res) => {
       ...post,
       likesCount: post.likes.length,
       commentsCount: post.comments.length,
-      sharesCount: post.shares.length
+      sharesCount: post.shares.length,
+      likesUsers: (post.likes || [])
+        .map((like) => (typeof like === "string" ? null : like.username))
+        .filter(Boolean)
     }));
 
     res.json({
@@ -101,10 +104,17 @@ exports.toggleLike = async (req, res) => {
 
     const userId = req.user.id;
 
-    if (post.likes.includes(userId)) {
-      post.likes = post.likes.filter((id) => id.toString() !== userId.toString());
+    const existingIndex = post.likes.findIndex((like) => {
+      if (typeof like === "string") {
+        return like.toString() === userId.toString();
+      }
+      return like.userId?.toString() === userId.toString();
+    });
+
+    if (existingIndex >= 0) {
+      post.likes = post.likes.filter((like, index) => index !== existingIndex);
     } else {
-      post.likes.push(userId);
+      post.likes.push({ userId, username: req.user.username });
     }
 
     await post.save();

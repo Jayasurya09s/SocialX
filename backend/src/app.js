@@ -19,4 +19,8 @@ app.get("/", (req, res) => {
   res.send("🚀 SocialX Backend Running");
 });
 
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
+});
+
 module.exports = app;

@@ -10,11 +10,20 @@ Links:
 
 - Authentication: signup, login, logout
 - Create posts with text, images, and polls
+- Public feed with username, content, timestamps, and media
 - Feed filters: All Posts, For You, Most Liked, Most Commented, Most Shared
-- Like, comment, share with auto-refresh counts
+- Search across users and post content
+- Likes, comments, and shares with live counts
+- Like usernames stored on posts
+- Comment usernames stored on posts
+- Poll voting (one vote per user)
+- Auto-refresh feed every 30 seconds
+- Pagination with “Load more”
 - Follow and unfollow users (persisted)
 - Profile drawer with stats, followers list, and post management
+- Delete your own posts from profile
 - About page with product overview
+- Responsive UI optimized for desktop and mobile
 
 ## Tech Stack
 
