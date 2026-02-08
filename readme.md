@@ -141,6 +141,13 @@ Users:
 - JSON body limit is set to 10MB to support image uploads.
 - JWT-protected endpoints require `Authorization: Bearer <token>`.
 
+## Screenshots
+
+![Feed (Desktop)](screenshots/feed-desktop.png)
+![Feed (Mobile)](screenshots/mobile.jpeg)
+![Profile Drawer](screenshots/profile-drawer.png)
+![Login & Signup](screenshots/login_signup.png)
+
 ## Author
 
 Jayanth Midde
