@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import API from "../api/axios";
 import PostCard from "./PostCard";
 
@@ -6,7 +6,7 @@ const Feed = ({ filter, refreshKey, searchQuery }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       setLoading(true);
       const res = await API.get(
@@ -17,18 +17,18 @@ const Feed = ({ filter, refreshKey, searchQuery }) => {
     } catch (err) {
       setLoading(false);
     }
-  };
+  }, [filter]);
 
   // 🔁 fetch on filter change or new post
   useEffect(() => {
     fetchPosts();
-  }, [filter, refreshKey]);
+  }, [fetchPosts, refreshKey]);
 
   // ⏱️ auto refresh every 30 seconds
   useEffect(() => {
     const interval = setInterval(fetchPosts, 30000);
     return () => clearInterval(interval);
-  }, [filter]);
+  }, [fetchPosts]);
 
   const normalizedQuery = (searchQuery || "").trim().toLowerCase();
   const filteredPosts = normalizedQuery
