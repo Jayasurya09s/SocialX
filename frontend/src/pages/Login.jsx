@@ -1,4 +1,4 @@
-import { TextField, Button, Box, Typography, Stack, Card, CardContent } from "@mui/material";
+import { TextField, Button, Box, Typography, Stack, Card, CardContent, Alert } from "@mui/material";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import API from "../api/axios";
@@ -8,11 +8,17 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
   const handleLogin = async () => {
-    const res = await API.post("/auth/login", form);
-    login(res.data);
-    navigate("/");
+    try {
+      setError("");
+      const res = await API.post("/auth/login", form);
+      login(res.data);
+      navigate("/");
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed. Check your credentials.");
+    }
   };
 
   return (
@@ -51,6 +57,8 @@ const Login = () => {
               margin="normal"
               onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
+
+            {error && <Alert severity="error">{error}</Alert>}
 
             <Button
               fullWidth

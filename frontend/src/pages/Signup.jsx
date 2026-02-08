@@ -1,4 +1,4 @@
-import { TextField, Button, Box, Typography, Stack, Card, CardContent } from "@mui/material";
+import { TextField, Button, Box, Typography, Stack, Card, CardContent, Alert } from "@mui/material";
 import { useState } from "react";
 import API from "../api/axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,10 +10,16 @@ const Signup = () => {
     email: "",
     password: ""
   });
+  const [error, setError] = useState("");
 
   const handleSignup = async () => {
-    await API.post("/auth/signup", form);
-    navigate("/login");
+    try {
+      setError("");
+      await API.post("/auth/signup", form);
+      navigate("/login");
+    } catch (err) {
+      setError(err.response?.data?.message || "Signup failed. Try again.");
+    }
   };
 
   return (
@@ -58,6 +64,8 @@ const Signup = () => {
               margin="normal"
               onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
+
+            {error && <Alert severity="error">{error}</Alert>}
 
             <Button
               fullWidth
