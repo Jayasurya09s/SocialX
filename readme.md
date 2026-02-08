@@ -2,6 +2,10 @@
 
 SocialX is a full-stack social feed application where users can sign up, create posts, interact with a live feed, and manage their profile. The UI is responsive and optimized for both desktop and mobile.
 
+Links:
+- Live Frontend: https://socialx-seven.vercel.app/
+- Backend API: https://socialx-vm8q.onrender.com/api
+
 ## Features
 
 - Authentication: signup, login, logout
@@ -84,6 +88,7 @@ Backend (Render):
 - Base URL: https://socialx-vm8q.onrender.com/api
 
 Frontend (Vercel):
+- Live URL: https://socialx-seven.vercel.app/
 - Set env var `REACT_APP_API_BASE_URL` to the Render URL above.
 
 ## System Architecture
