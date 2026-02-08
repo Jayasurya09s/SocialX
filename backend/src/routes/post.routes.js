@@ -5,7 +5,8 @@ const {
   toggleLike,
   addComment,
   sharePost,
-  votePoll
+  votePoll,
+  deletePost
 } = require("../controllers/post.controller");
 
 const authMiddleware = require("../middleware/auth.middleware");
@@ -19,4 +20,5 @@ router.post("/:id/like", authMiddleware, toggleLike);
 router.post("/:id/comment", authMiddleware, addComment);
 router.post("/:id/share", authMiddleware, sharePost);
 router.post("/:id/vote", authMiddleware, votePoll);
+router.delete("/:id", authMiddleware, deletePost);
 module.exports = router;
